@@ -1,0 +1,21 @@
+name: markdown
+version: 0.1.0
+
+authors:
+  - TranDat <visualbasic2013@hotmail.com>
+
+targets:
+  markdown:
+    main: src/markdown.cr
+
+
+dependencies:
+  alizarin:
+    github: TheEEs/alizarin
+    version: 0.1.1
+  sass:
+    github: straight-shoota/sass.cr
+
+crystal: 0.33.0
+
+license: MIT

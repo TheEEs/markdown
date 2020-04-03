@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alizarin.MD</title>
+
+    <script>
+        <%= File.read("#{__DIR__}/jquery.js") %>
+    </script>
+
+    <script>
+        <%= File.read("#{__DIR__}/simplemde.min.js") %>
+    </script>
+    <script>
+        <%= File.read("#{__DIR__}/context.js") %>
+    </script>
+    <style>
+        <%= File.read("#{__DIR__}/normalize.css") %>
+    </style>
+    <style>
+        <%= File.read("#{__DIR__}/simplemde.min.css") %>
+    </style>
+    <style>
+        <%= Sass.compile_file("#{__DIR__}/app.scss") %>
+    </style>
+    <style>
+        <%= File.read("#{__DIR__}/context.standalone.css") %>
+    </style>
+</head>
+<body>
+    <textarea id="init-textarea"></textarea>
+</body>
+</html>
+
