@@ -3,7 +3,7 @@ require "ecr"
 require "sass"
 require "./lib/**"
 
-editor = Editor.new
+editor = Editor.new true
 
 editor.extension_dir = "./webExtension/"
 
@@ -13,9 +13,12 @@ editor.on_close do |e|
   exit 0
 end
 
-editor.when_script_finished do 
+editor.when_script_finished do
   puts "JS finished".colorize :green
 end
+
+editor["enable-developer-extras"] = true
+editor.show_inspector
 
 editor.when_document_loaded do |webview|
   editor.await "document.title" do |value|
@@ -49,7 +52,6 @@ editor.when_document_loaded do |webview|
   JS
 end
 
-
-editor.default_size 800, 600
+editor.window_size 800, 600
 
 editor.run

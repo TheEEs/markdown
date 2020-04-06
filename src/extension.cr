@@ -3,6 +3,7 @@ require "./lib/**"
 
 include WebExtension
 
+
 initialize_extension do
   openFile = function params do
     dialog = GtkDialog.new_dialog "Open File", nil,
@@ -51,7 +52,7 @@ initialize_extension do
         file_name = String.new file_name_ptr
         LibWebKit.destroy_widget dialog
         File.write file_name, params.first.to_s
-        return JSCPrimative.new true 
+        return JSCPrimative.new true
       end
     end
     LibWebKit.destroy_widget dialog
@@ -59,4 +60,13 @@ initialize_extension do
   end
 
   JSCContext.set_value "saveFile", saveFile
+
+
+  socket = UNIXSocket.new("/tmp/alizarin#{WebExtension.uuid}.sock")
+
+  ipc = function params do 
+    socket.puts params.first.to_s
+  end
+
+  JSCContext.set_value "ipc", ipc
 end

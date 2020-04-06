@@ -5,8 +5,8 @@ class Editor < WebView
 
   protected getter await_channel
 
-  def initialize
-    super
+  def initialize(ipc : Bool = false)
+    super(ipc)
   end
 
   def await(js_code : String, &block : JSC::JSValue -> Nil)
