@@ -1,8 +1,7 @@
 require "./editor"
 require "ecr"
 require "sass"
-require "./lib/**"
-
+require "colorize"
 editor = Editor.new true
 
 editor.extension_dir = "./webExtension/"
@@ -19,6 +18,24 @@ end
 
 editor["enable-developer-extras"] = true
 editor.show_inspector
+
+editor.when_ipc_message_received do |msg|
+  case msg
+  when "readfile"
+    dialog = WebView::OpenFileDialog.new webview: editor
+    dialog.add_file_filter "Markdown", "*.md"
+    path = dialog.show || ""
+    if File.exists?(path)
+      editor.execute_javascript "readFile('#{path}')"
+    end
+  when "writefile"
+    dialog = WebView::SaveFileDialog.new webview: editor
+    dialog.file_name = "Untitled.md"
+    dialog.add_file_filter "Markdown", "*.md"
+    path = dialog.show
+    editor.execute_javascript "writeFile('#{path}')"
+  end
+end
 
 editor.when_document_loaded do |webview|
   editor.await "document.title" do |value|
@@ -37,15 +54,14 @@ editor.when_document_loaded do |webview|
         text : "Open File",
         action : function(e){
           e.preventDefault();
-          var content = openFile();
-          mde.value(content);
+          openFile();
         }
       },
       {
         text : "Save file",
         action: function(e){
           e.preventDefault();
-          saveFile(mde.value());
+          saveFile();
         }
       }
     ])
