@@ -2,7 +2,7 @@ version: 1.0
 shards:
   alizarin:
     github: TheEEs/alizarin
-    version: 0.2.0
+    version: 0.3.0
 
   sass:
     github: straight-shoota/sass.cr
