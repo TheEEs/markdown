@@ -33,7 +33,11 @@ editor.when_ipc_message_received do |msg|
     dialog.file_name = "Untitled.md"
     dialog.add_file_filter "Markdown", "*.md"
     path = dialog.show
-    editor.execute_javascript "writeFile('#{path}')"
+    if path
+      editor.execute_javascript "writeFile('#{path}')"
+    else
+      puts "save canceled"
+    end
   end
 end
 
