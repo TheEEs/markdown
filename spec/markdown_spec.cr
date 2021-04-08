@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Markdown do
+describe Editor do
   # TODO: Write tests
 
   it "works" do

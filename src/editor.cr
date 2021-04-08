@@ -15,7 +15,7 @@ class Editor < WebView
         res = LibWebKit.script_finish_result object, result, nil
         if res.null?
           puts "JavaScript execution has cause error(s)".colorize(:red).on(:black)
-          return
+          next
         end
         jsc_value = LibWebKit.get_jsc_from_js_result res
         data = Box({(JSC::JSValue -> Nil), Editor}).unbox(user_data)

@@ -1,10 +1,10 @@
-version: 1.0
+version: 2.0
 shards:
   alizarin:
-    github: TheEEs/alizarin
-    version: 0.3.0
+    git: https://github.com/theees/alizarin.git
+    version: 0.3.0+git.commit.ec403175e9fb9c6ce00be4a370104c5f6f724bfe
 
   sass:
-    github: straight-shoota/sass.cr
-    version: 0.5.0
+    git: https://github.com/straight-shoota/sass.cr.git
+    version: 0.6.0
 
